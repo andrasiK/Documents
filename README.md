@@ -1,6 +1,2 @@
 # hello-world
-myFirstRepo
-
-It's my first GitHub file. I'm gonna try things out here.
-
-Yeeaaahhhh
+This repository will be used to store programming related documents. Notes, checklists, etc.
