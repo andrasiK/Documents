@@ -1,0 +1,105 @@
+# MVCApp
+Simple MVC project to refresh and also learn new things
+
+
+Tech stack:
+- ASP.NET 5 and MVC6
+- HTML5, Javascript, CSS
+- Using Bootstrap
+- Data with Entity Framework
+- Client-side with AngularJS
+
+
+Extensions used in Visual Studio for this project:
+  - Add New File
+  - Web Essentials
+  - Open Command Line
+
+
+
+New Empty Web project template (ASP .NET5   = Core ???) -> ASP .Net Core3 = ASP .NET5
+-------------------------------------------------------------
+
+
+
+****************************************************************************
+*The aim of this little project:                                           *
+****************************************************************************
+* - create the "World" website.                                            *
+* - website where people can plan their trips on a map                     *
+* - will include:                                                          *
+*             - authentication (login)                                     *
+*             - add trips                                                  *
+*             - manage each of our trips                                   *
+*             - show a map which will contain all of the stops of our trip *
+****************************************************************************
+
+                             *-------------*
+                             * Misc notes  *
+                             *-------------*
+
+Serve static files
+--------------------------------
+- ASP .Net gives the opportunity to responde any sort of request (The "context" passed in the Startup. cs)
+       
+       app.UseEndpoints(endpoints =>
+                  {
+                      endpoints.MapGet("/", async context =>
+                      {
+
+Startup.cs  -> where the web configuration happens
+               the Startup class is responsible for setting up ASP.NET 5
+
+- one of the first things to need to do: to serve static files
+	- in 'wwwroot' will be stored all the public static files (html, images, css, pdf, zip, etc.)
+
+- Shift + F2 - add a simple empty file
+
+
+
+- when using IIS to test the app, it knows about static files by default (index.html), but with hosting in an another 
+  environment (ex. Cloud) we cannot depend on that
+  So we pass a piece of middleware into the Startup.cs (into public void Configure(IApplicationBuilder app, IWebHostEnvironment env))
+  app.UseStaticFiles();
+  good to use the UseStaticFiles() middleware in every case, unless we specifically don't serve any static files at all.... (ex. WebAPI)
+  need to give the correct path: https://localhost:44331/index.html, because it not handles the default file mapping for us. 
+  without index.html it doesn't finds it automatically
+
+  (there is no appsettings.json file anymore. There is 'projectname.csproj' where dependencies can be set)
+
+Basic HTML:
+	
+	- <!DOCTYPE> specifies to the browser the HTML version (current version is HTML5)
+
+	- the first object is <html></html> object this is the container for everything on the page
+	- the first child inside <hmtl> is normally a section called <head></head>. Here is the non structural information kept. Kind of metadata. (<title> and charset)
+
+	- <body> section: the descriptive strucutre of what your page is. 
+
+	- shft + alt + w  -> in html file wraps into a <div> the context (it comes with the Web Essentials extension)
+          <div> is a structure for some part of the page. This is a container which can contain structure of elements (ex. main section and in an other div, the footer)
+
+	Forms:
+	- for collecting information from the user
+
+Basic CSS:
+	- we can write the <style> direct to HTML. But it results a quite ugly code
+	- we can place the <style> section into the header with selectors of what HTML tag we want to style. 
+	- but the best is to place it into a separate stylesheet file and link the file to the HTML page. So the 'style' file can be used across multiple HTML pages with just linking it
+
+	- 'id' selector type: there will be 1 per page, so it's good to use for large pieces of the page which only exists once.
+	- we specify the selector with the # symbol and name. 
+
+	- we can also use "class" as a selector.  Class selectors start with '.'(period)
+
+	- at lists are unordered lists <ul> and ordered lists <ol>(ordered lists are for numbered lists)
+
+	- anchor tag <a> and has an href of when clicking, where should go. 
+
+	- by removing the space at selector choosing, it says search for items that have the specified class and not search for an object/class that's inside it 
+
+The Box model:
+	- margin -> border -> padding -> content <- padding <- border <- margin
+	- top, bottom, left, right
+  	- the content: height; width
+	- + at runtime: actual-height, actual-width      --- this not includes the margin!
