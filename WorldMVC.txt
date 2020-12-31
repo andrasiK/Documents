@@ -143,3 +143,7 @@ jQuery:
 	- the first parameter is often some data, but the second parameter is almoust always some kind of call of a function
 
 	- with CSS selector, that return more than 1 value (like Classes)
+
+	- can apply a class, for multiple id/classes ('toggleClass' method). So they will have the same behavior. It's returning a 'wrapped set' of DOM elements.
+	- toggeClass is can be used, to assign a class to elements on and off. And it's can be used at CSS. When the class is there, can implement some CSS behavior.
+	  CSS changes only will take effect when the class is there. 
