@@ -103,3 +103,43 @@ The Box model:
 	- top, bottom, left, right
   	- the content: height; width
 	- + at runtime: actual-height, actual-width      --- this not includes the margin!
+
+
+Basic JavaScript:
+	- it's the client side language of web applications
+	- it's an object oriented language 
+	- uses a Prototypical Inheritance instead of Classes
+	- dynamic -> the types aren't fixed at compile time (there really isn't a compile time). Types can change over time.
+		  -> not typeless, but dynamically typed
+	- it's Just-in-time compiled, without an intermediate language
+
+	- putting scripts at the bottom, it's a best practice to be sure that they execute after most of the HTML page is constructed by the browser
+
+	- JavaScript events: 
+		- capturing events on elements of our page and then reacting to them in JavaScript
+
+	- Global Scope: we want to minimize to adding things into this global scope/global namespace. Because collisions can occur. (ex. variable names -> overwrite each other)
+		- a function in JS provides it's on scope. Variables are not visible outside the scope.
+		- so it's a common solution that wrap things up in a function. And this function will be a nameless function which is executed immediately.(self executing anonymous function / immediately invoked function expression)
+
+
+Bower:
+	- in ASP.NET we still use NuGet PAckage manager for server side package management, but client side package management differs from now
+	- Bower is the tool now, to manage client side packages
+	- Add New Item -> Bower configuration file     - or add manually....(bower.json)
+	- it's just a configuration file, that lists, what dependencies are needed for this project
+	- but nowadays Bower seems irrelevant. For .NET it's LibMan now as I understand...
+
+LibMan:
+	- right click on project -> Add -> Client Side Library
+
+
+
+jQuery:
+	- add a new script line to the HTML page (aboce the original javascript line)
+	- the purpose for jQuery is query the document for individual elements. It does this using CSS selectors as a language for it.
+	- $ - the sign of jQuery
+	- jQuery was so popular, because it handled the cross-platform problems for using across the different browsers. It was a really important step in web development.
+	- the first parameter is often some data, but the second parameter is almoust always some kind of call of a function
+
+	- with CSS selector, that return more than 1 value (like Classes)
