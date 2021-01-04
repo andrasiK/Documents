@@ -65,7 +65,11 @@ Startup.cs  -> where the web configuration happens
   need to give the correct path: https://localhost:44331/index.html, because it not handles the default file mapping for us. 
   without index.html it doesn't finds it automatically
 
-  (there is no appsettings.json file anymore. There is 'projectname.csproj' where dependencies can be set)
+  (there is no project.json file anymore. There is 'projectname.csproj' where dependencies can be set)
+
+
+
+
 
 Basic HTML:
 	
@@ -81,6 +85,10 @@ Basic HTML:
 
 	Forms:
 	- for collecting information from the user
+
+
+
+
 
 Basic CSS:
 	- we can write the <style> direct to HTML. But it results a quite ugly code
@@ -98,11 +106,18 @@ Basic CSS:
 
 	- by removing the space at selector choosing, it says search for items that have the specified class and not search for an object/class that's inside it 
 
+
+
+
 The Box model:
 	- margin -> border -> padding -> content <- padding <- border <- margin
 	- top, bottom, left, right
   	- the content: height; width
 	- + at runtime: actual-height, actual-width      --- this not includes the margin!
+
+
+
+
 
 
 Basic JavaScript:
@@ -147,3 +162,35 @@ jQuery:
 	- can apply a class, for multiple id/classes ('toggleClass' method). So they will have the same behavior. It's returning a 'wrapped set' of DOM elements.
 	- toggeClass is can be used, to assign a class to elements on and off. And it's can be used at CSS. When the class is there, can implement some CSS behavior.
 	  CSS changes only will take effect when the class is there. 
+
+
+
+
+MVC6:
+	- the server side framework that allows us to create views of code or data in a model-view-controller pattern
+	- Model: representing the data
+	- View: what we are returning back to the user (normally HTML, but in case of API that might be data that we are sending back to the view)
+	- Controller: coordinates the interaction between them. A Controller is what is normally executed immediately when a request comes in to a webserver and that 
+		      Controller then determines what Models are going to use and how to render a view.
+		      In MVC6 we're gonna have both Controllers for an API and as well as ones that return HTML in a form in webpages. Good to separate them in different folders.
+		      (New Folder -> Controllers -> New Folder -> Web)
+	- this particular application will have only 1 Controller.
+
+	- Razor: serves side markup code
+
+	- MVC uses a traditional approach to find Views: looks in a folder called: Views -> and then looks in a folder based on the Controller name.
+
+	- ViewBag -> is an expandable property list. A bag of properties.
+
+	- Enabling MVC6 in a project:
+		- if we want to use MVC we need to add to our project.
+		- in Startup.cs -> in ConfigureServices -> services.AddMvc(); So the services will have the MVC interface associated with them.   -> need to add the NuGet package also for this!
+		- ConfigureServices in Startup.cs is just configuring the dependency injection container! Services what we want to use in our app.
+		- in Configure (in Startup.cs) we will actually turn on MVC! So first we enable it in ConfigureServices and then turn it on in Configure!
+
+		- services.AddMVC() and services.AddMvcCore() where the old methods to include services. Now we can also use: services.AddControllers() ; services.AddControllersWithViews(); Services.AddRazotPages();
+		- services.AddMVC() includes the whole with all the other elements. The others are more specific.
+
+		- need to configure project.json to include MVC! -> there is no project.json anymore... -> but it seems to work...
+
+		- if an app calls UseMVC its good to Migrate it to Endpoint routing!
