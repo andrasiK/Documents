@@ -194,3 +194,15 @@ MVC6:
 		- need to configure project.json to include MVC! -> there is no project.json anymore... -> but it seems to work...
 
 		- if an app calls UseMVC its good to Migrate it to Endpoint routing!
+		app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=App}/{action=Index}/{id?}"
+                    );
+
+            });
+
+
+	- when going to the root at the website it works fine (CSS and Javascript). BUT! When going to ..../app/index  -> then just plain HTML is shown...
+	  It searched the CSS and Javascript file in the ..../app/index/css/site.css.   But its not there. Need to fix this with a ~/ sign before the path. So will be searching at the root always.
