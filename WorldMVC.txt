@@ -151,7 +151,7 @@ LibMan:
 
 
 jQuery:
-	- add a new script line to the HTML page (aboce the original javascript line)
+	- add a new script line to the HTML page (above the original javascript line)
 	- the purpose for jQuery is query the document for individual elements. It does this using CSS selectors as a language for it.
 	- $ - the sign of jQuery
 	- jQuery was so popular, because it handled the cross-platform problems for using across the different browsers. It was a really important step in web development.
@@ -206,3 +206,52 @@ MVC6:
 
 	- when going to the root at the website it works fine (CSS and Javascript). BUT! When going to ..../app/index  -> then just plain HTML is shown...
 	  It searched the CSS and Javascript file in the ..../app/index/css/site.css.   But its not there. Need to fix this with a ~/ sign before the path. So will be searching at the root always.
+
+
+	- creating a Layout:
+		- need a folder named: Shared  -> here will be the parts and components that will be used across different Controllers and Views
+		- need to wire up the Layout page with an other file in the Views folder (_ViewStart.cshtml) - the responsibility of this file, to be the beginning point of every View.
+		  Every View looks up and gets all the properties that are placed here in this file.
+
+
+	- Tag Helpers:
+		- can hardcode the links at the href of the button(/app/about  ; /app/contact), but it's not a good practice
+		- better to use tag helpers here to set up for the href based on the 2 information that we provide to him (asp-controller = "App" asp-action= "About")
+		- need to include tag helpers into the page, otherwise they will not work! (_ViewImports.cshtml file    -> @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers)
+		- tag helpers will work also when the route changes (in Startup.cs)
+
+	- need to add a ViewModel, a structure that can contain the needed data of that page
+	- add this to the beginning of the page also @model........
+
+	- using Validation:
+		- using tag helper 'asp-for' we specify what the name of the property on the model is 
+		- we want to validate this on the client. But also needs to validated it on the server side
+		- Data Annotations can help us with this. We use them in the ViewModel
+		- need to add new dependencies: jQuery validate and jQuery validation-unobtrusive
+		- we can place these new 2 scripts to the end of the _Layout page with the other scripts to include them in to our page, but maybe not all pages will use them, so it's unnecessary to load the every time
+		- so we can place them to the end of the actual page (Contact). BUT! In this case they will be loaded before then the original jQuery on which they depend, because RenderBody() in _Layout runs before the scripts at the bottom of the page
+		- the solution to this is: use @RenderSection()  -> this will inject the scripts into our _Layout page from the Contact page. So they will be running after the original jQuery
+
+		- also needs to be told to ASP .NET how we want to show the errors: need to include a tag helper: asp-validation-for:...
+		- also we can have model level errors. We can use asp-validation-summary="ValidationSummary.ModelOnly" 
+
+		- when we provide correct data and we send it, it ends up as a query string parameter (ex.: https://localhost:44331/App/Contact?Name=Kristof&Email=kdslkd%40dsds.com&Message=Hello+World). It's the default behavior
+		- but we will use POST and model bindig, becuse that is the correct way to send data.
+		- in the View and in the Controller we need to implement this HTTPPOST 
+
+	- adding a Service:
+		- add a service to handle the actual mailing of the Contact page
+		- add new folder (Services) -> new file(IMailService) interface
+
+		- the Controller needs to have a constructor. Because in ASP.NET all of the service locator, all of the dependency injection is Controller injection.
+		- to add the service: in Startup.cs  ->  service.AddScoped();   (services.AddScoped<IMailService, DebugMailService>();)
+
+	- in ASP .NET it is a better way then check the build if it's debug or release to decide that we are in debug or release.
+	- we can check where we are hosted to decide this if it's debug or not. 
+		- at ' ConfigureServices' in 'Startup.cs' we need to add 'IWebHostEnvironment'
+	
+	- to fill out the 'from' and 'to' in the Sendmail function parameter, we will use some configuration:
+		- in Startup needs to create a configuration object based on some places to read the configuration.
+
+		- EnvironmentVariables are common places to -especially when cloud hosting- to read certain configurations
+		- but in this case we don't want the sites Email address as an environmental varialble. We want to create it as JSON
